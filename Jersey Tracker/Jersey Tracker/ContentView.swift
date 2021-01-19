@@ -7,13 +7,21 @@
 
 import SwiftUI
 
+struct Player: Codable, Identifiable {
+    let id: String
+    let name: String
+    let graduation: String
+}
+
+
+
+
 struct ContentView: View {
   
-    
     var body: some View {
         NavigationView{
             
-            Form{
+            List{
                 Section (header: Text("All Players")){
                 
                     
