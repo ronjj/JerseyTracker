@@ -7,38 +7,25 @@
 
 import SwiftUI
 
-struct Player: Codable, Identifiable {
-    let id: String
-    let name: String
-    let graduation: String
+struct Player {
+    var id = UUID()
+    var name: String
 }
 
-
-
-
 struct ContentView: View {
+    let players = [Player(name:"Tom"), Player(name:"Luke"),Player(name:"Ron"),]
+    
+    
   
     var body: some View {
         NavigationView{
-            
-            List{
-                Section (header: Text("All Players")){
-                
-                    
+            VStack{
+                List {
+                    ForEach(players, id: \.id) { player in
+                        Text("\(player.name)")
+                        
                 }
-                
-                Section (header: Text("Incomplete PLayers")){
-                    
-                    
-                }
-                
-                Section (header: Text("Complete Players")){
-                    
-                    
-                }
-                
             }
-            
             
             .navigationBarTitle("Jersey Tracker")
         }
@@ -48,5 +35,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+        }
     }
 }
