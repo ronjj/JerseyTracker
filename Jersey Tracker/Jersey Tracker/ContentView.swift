@@ -32,7 +32,7 @@ struct ContentView: View {
                         Text(players.name.capitalized)
                     })
                 }
-                
+            
             }
             .navigationTitle("Jersey Tracker")
             
@@ -49,6 +49,7 @@ struct ContentView: View {
                 }
         }
     
+       
        
     }
 }

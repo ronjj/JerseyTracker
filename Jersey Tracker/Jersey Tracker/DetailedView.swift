@@ -14,36 +14,26 @@ struct DetailedView: View {
     @State var notes = ""
     
     var body: some View {
-            VStack(alignment: .leading, spacing: 30){
-                ScrollView(.vertical, showsIndicators: false){
-                    VStack(alignment:.leading){
-                        Text("Home Jersey")
-                            .font(.headline)
-                            .padding(.top, 20)
-
-                        Toggle("Received", isOn: $homeJersey)
-                        Divider()
-                    }
-                   
-                    VStack(alignment:.leading){
-                        Text("Away Jersey")
-                            .font(.headline)
-                            .padding(.top, 20)
-                        Toggle("Received", isOn: $awayJersey)
-                        Divider()
-                    }
-                    
-                    VStack(alignment:.leading){
-                        Text("Addtional Player Notes")
-                            .font(.headline)
-                            .padding(.top, 20)
-                        TextField("Notes", text: $notes )
-                            .padding(.top, 20)
+        NavigationView {
+            VStack(alignment: .leading){
+                    Form{
+                       Section (header: Text("Home Jersey")){
+                            Toggle("Received", isOn: $homeJersey)
+                            
+                        }
                        
+                       Section (header: Text("Away Jersey")){
+                            Toggle("Received", isOn: $awayJersey)
+                           
+                        }
+                        
+                       Section (header: Text("Additional Notes")){
+                            TextField("Notes", text: $notes )
+                           
+                        }
                     }
-                   
-                    Spacer()
                 }
+            .navigationTitle("Player Information")
             }
         }
     }
