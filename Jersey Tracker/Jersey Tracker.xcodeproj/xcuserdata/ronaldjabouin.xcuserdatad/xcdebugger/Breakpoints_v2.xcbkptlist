@@ -14,10 +14,10 @@
             filePath = "Jersey Tracker/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "ContentView_Previews"
-            landmarkType = "14">
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "previews"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

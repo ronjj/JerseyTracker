@@ -10,26 +10,20 @@ import SwiftUI
 
 struct ContentView: View {
 
-
-  @State private var searchText = ""
+@Environment(\.managedObjectContext) var moc
+@State private var searchText = ""
+@State private var showingAddScreen = false
     
     var players = [
         Players(name: "ronald"),
         Players(name: "tom"),
         Players(name: "luke"),
         Players(name: "jack")
-
-    
     ]
     
     var body: some View {
         NavigationView {
             VStack {
-                //hacky way of making a navigationTitle. Need to look into why it is not working
-                Text("Jersey Tracker")
-                    .font(.headline)
-                    .padding()
-                
                 SearchBar(text: $searchText)
                 
                 List(players.filter({ "\($0)".contains(searchText.lowercased()) || searchText.isEmpty })){ players in
@@ -40,9 +34,22 @@ struct ContentView: View {
                 }
                 
             }
+            .navigationTitle("Jersey Tracker")
             
+            .navigationBarItems(leading:EditButton(), trailing: Button(action: {
+                    self.showingAddScreen.toggle()
+                }) {
+                    Image(systemName: "plus")
+                }
+                
+                )
+            
+                .sheet(isPresented: $showingAddScreen) {
+                    AddPlayerView().environment(\.managedObjectContext, self.moc)
+                }
         }
-       // For some reason, this isn't working .navigationTitle("Jersey Tracker")
+    
+       
     }
 }
 

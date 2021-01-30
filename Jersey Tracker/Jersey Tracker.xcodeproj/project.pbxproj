@@ -14,6 +14,7 @@
 		54B0F1E625C5B8C3006AE64D /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B0F1E525C5B8C3006AE64D /* Player.swift */; };
 		54B0F1EA25C5BDD2006AE64D /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B0F1E925C5BDD2006AE64D /* SearchBar.swift */; };
 		54B0F1ED25C5C867006AE64D /* DetailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B0F1EC25C5C867006AE64D /* DetailedView.swift */; };
+		54B0F1F025C5D663006AE64D /* AddPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B0F1EF25C5D663006AE64D /* AddPlayerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		54B0F1E525C5B8C3006AE64D /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		54B0F1E925C5BDD2006AE64D /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		54B0F1EC25C5C867006AE64D /* DetailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedView.swift; sourceTree = "<group>"; };
+		54B0F1EF25C5D663006AE64D /* AddPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			children = (
 				542A500A25A3EBAB0051E7A9 /* Jersey_TrackerApp.swift */,
 				542A500C25A3EBAB0051E7A9 /* ContentView.swift */,
+				54B0F1EF25C5D663006AE64D /* AddPlayerView.swift */,
 				54B0F1EC25C5C867006AE64D /* DetailedView.swift */,
 				54B0F1E525C5B8C3006AE64D /* Player.swift */,
 				54B0F1E925C5BDD2006AE64D /* SearchBar.swift */,
@@ -148,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				54B0F1E625C5B8C3006AE64D /* Player.swift in Sources */,
+				54B0F1F025C5D663006AE64D /* AddPlayerView.swift in Sources */,
 				54B0F1EA25C5BDD2006AE64D /* SearchBar.swift in Sources */,
 				54B0F1ED25C5C867006AE64D /* DetailedView.swift in Sources */,
 				542A500D25A3EBAB0051E7A9 /* ContentView.swift in Sources */,
