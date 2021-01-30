@@ -11,6 +11,9 @@
 		542A500D25A3EBAB0051E7A9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542A500C25A3EBAB0051E7A9 /* ContentView.swift */; };
 		542A500F25A3EBAB0051E7A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 542A500E25A3EBAB0051E7A9 /* Assets.xcassets */; };
 		542A501225A3EBAB0051E7A9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 542A501125A3EBAB0051E7A9 /* Preview Assets.xcassets */; };
+		54B0F1E625C5B8C3006AE64D /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B0F1E525C5B8C3006AE64D /* Player.swift */; };
+		54B0F1EA25C5BDD2006AE64D /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B0F1E925C5BDD2006AE64D /* SearchBar.swift */; };
+		54B0F1ED25C5C867006AE64D /* DetailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B0F1EC25C5C867006AE64D /* DetailedView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +23,9 @@
 		542A500E25A3EBAB0051E7A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		542A501125A3EBAB0051E7A9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		542A501325A3EBAB0051E7A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		54B0F1E525C5B8C3006AE64D /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		54B0F1E925C5BDD2006AE64D /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		54B0F1EC25C5C867006AE64D /* DetailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +60,9 @@
 			children = (
 				542A500A25A3EBAB0051E7A9 /* Jersey_TrackerApp.swift */,
 				542A500C25A3EBAB0051E7A9 /* ContentView.swift */,
+				54B0F1EC25C5C867006AE64D /* DetailedView.swift */,
+				54B0F1E525C5B8C3006AE64D /* Player.swift */,
+				54B0F1E925C5BDD2006AE64D /* SearchBar.swift */,
 				542A500E25A3EBAB0051E7A9 /* Assets.xcassets */,
 				542A501325A3EBAB0051E7A9 /* Info.plist */,
 				542A501025A3EBAB0051E7A9 /* Preview Content */,
@@ -138,6 +147,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54B0F1E625C5B8C3006AE64D /* Player.swift in Sources */,
+				54B0F1EA25C5BDD2006AE64D /* SearchBar.swift in Sources */,
+				54B0F1ED25C5C867006AE64D /* DetailedView.swift in Sources */,
 				542A500D25A3EBAB0051E7A9 /* ContentView.swift in Sources */,
 				542A500B25A3EBAB0051E7A9 /* Jersey_TrackerApp.swift in Sources */,
 			);

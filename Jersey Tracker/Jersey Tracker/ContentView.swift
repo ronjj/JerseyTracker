@@ -7,28 +7,42 @@
 
 import SwiftUI
 
-struct Player {
-    var id = UUID()
-    var name: String
-}
 
 struct ContentView: View {
-    let players = [Player(name:"Tom"), Player(name:"Luke"),Player(name:"Ron"),]
+
+
+  @State private var searchText = ""
     
+    var players = [
+        Players(name: "ronald"),
+        Players(name: "tom"),
+        Players(name: "luke"),
+        Players(name: "jack")
+
     
-  
+    ]
+    
     var body: some View {
-        NavigationView{
-            VStack{
-                List {
-                    ForEach(players, id: \.id) { player in
-                        Text("\(player.name)")
-                        
+        NavigationView {
+            VStack {
+                //hacky way of making a navigationTitle. Need to look into why it is not working
+                Text("Jersey Tracker")
+                    .font(.headline)
+                    .padding()
+                
+                SearchBar(text: $searchText)
+                
+                List(players.filter({ "\($0)".contains(searchText.lowercased()) || searchText.isEmpty })){ players in
+                    NavigationLink(destination: DetailedView(),
+                    label: {
+                        Text(players.name.capitalized)
+                    })
                 }
+                
             }
             
-            .navigationBarTitle("Jersey Tracker")
         }
+       // For some reason, this isn't working .navigationTitle("Jersey Tracker")
     }
 }
 
@@ -37,4 +51,11 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
         }
     }
+
+
+struct Players: Identifiable {
+    var id = UUID()
+    var name: String
+
 }
+
