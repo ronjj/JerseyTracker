@@ -15,7 +15,6 @@ struct Players: Identifiable {
 
 struct ContentView: View {
 
-@Environment(\.managedObjectContext) var moc
 @State private var searchText = ""
 @State private var showingAddScreen = false
     
@@ -32,11 +31,12 @@ struct ContentView: View {
                SearchBar(text: $searchText)
                 List{
                     Section  (header: Text("All Players")) {
+                    // Code I got from a tutorial to make the searchbar
                        ForEach(players.filter({ "\($0)".contains(searchText.lowercased()) || searchText.isEmpty })){ players in
-                                            NavigationLink(destination: DetailedView(),
+                            NavigationLink(destination: DetailedView(),
                                                            
-                                            label: {
-                                                Text(players.name.capitalized)
+                                label: {
+                                    Text(players.name.capitalized)
                                         })
                             }
                     }
@@ -49,12 +49,10 @@ struct ContentView: View {
                         // A ForEach for players that have 2 toggles set
                     }
                 }
-                
-              
-                
             }
             .navigationTitle("Jersey Tracker")
             
+            //logic for plus and edit button needs to be redone
             .navigationBarItems(leading:EditButton(), trailing: Button(action: {
                     self.showingAddScreen.toggle()
                 }) {
@@ -64,11 +62,12 @@ struct ContentView: View {
                 )
             
                 .sheet(isPresented: $showingAddScreen) {
-                    AddPlayerView().environment(\.managedObjectContext, self.moc)
+                    AddPlayerView()
                 }
         }
     }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
