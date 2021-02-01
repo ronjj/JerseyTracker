@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+struct Players: Identifiable {
+    var id = UUID()
+    var name: String
+
+}
 
 struct ContentView: View {
 
@@ -24,15 +29,29 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
-                SearchBar(text: $searchText)
-                
-                List(players.filter({ "\($0)".contains(searchText.lowercased()) || searchText.isEmpty })){ players in
-                    NavigationLink(destination: DetailedView(),
-                    label: {
-                        Text(players.name.capitalized)
-                    })
+               SearchBar(text: $searchText)
+                List{
+                    Section  (header: Text("All Players")) {
+                       ForEach(players.filter({ "\($0)".contains(searchText.lowercased()) || searchText.isEmpty })){ players in
+                                            NavigationLink(destination: DetailedView(),
+                                                           
+                                            label: {
+                                                Text(players.name.capitalized)
+                                        })
+                            }
+                    }
+                    
+                    Section  (header: Text("Incomplete Players")) {
+                        // A ForEach for players that 0 or 1 toggles set
+                    }
+                    
+                    Section  (header: Text("Complete Players")) {
+                        // A ForEach for players that have 2 toggles set
+                    }
                 }
-            
+                
+              
+                
             }
             .navigationTitle("Jersey Tracker")
             
@@ -48,9 +67,6 @@ struct ContentView: View {
                     AddPlayerView().environment(\.managedObjectContext, self.moc)
                 }
         }
-    
-       
-       
     }
 }
 
@@ -61,9 +77,5 @@ struct ContentView_Previews: PreviewProvider {
     }
 
 
-struct Players: Identifiable {
-    var id = UUID()
-    var name: String
 
-}
 

@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+
+
+
 struct DetailedView: View {
     
     @State var homeJersey = false
@@ -28,10 +31,14 @@ struct DetailedView: View {
                         }
                         
                        Section (header: Text("Additional Notes")){
-                            TextField("Notes", text: $notes )
-                           
+                        TextField("Notes", text: $notes)
+                            .frame(height: 55)
+                                      
+                                          
                         }
                     }
+                
+             
                 }
             .navigationTitle("Player Information")
             }
@@ -43,3 +50,5 @@ struct DetailedView_Previews: PreviewProvider {
         DetailedView()
     }
 }
+
+
