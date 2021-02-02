@@ -33,20 +33,22 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
+            
             VStack {
                 newPlayerField.padding()
+                  
                 List{
-                 
                         Section  (header: Text("All Players")) {
-                          
                             ForEach(self.playerStore.players) { player in
                                 NavigationLink(destination: DetailedView()){
                                     Text(player.name.capitalized)
+                                      
                             }
-                          
+                              
                         }
+                            .onDelete(perform:self.delete)
                     }
-                    
+                        
 
                     Section  (header: Text("Incomplete Players")) {
                         // A ForEach for players that 0 or 1 toggles set
@@ -60,15 +62,15 @@ struct ContentView: View {
                 }
                 
             }
+            
            
             .navigationTitle("Jersey Tracker")
             
             //logic for plus and edit button needs to be redone
             .navigationBarItems(leading:EditButton())
+           
         }
     }
-    
-   
     
     func delete(at offsets: IndexSet) {
         playerStore.players.remove(atOffsets: offsets)
@@ -83,7 +85,7 @@ struct ContentView_Previews: PreviewProvider {
     }
 
 
-// need to put        .onDelete(perform:self.delete) somewhere
+// need to put       somewhere
 
 // Code I got from a tutorial to make the searchbar
    /*ForEach(players.filter({ "\($0)".contains(searchText.lowercased()) || searchText.isEmpty })){ players in
