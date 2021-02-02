@@ -13,8 +13,7 @@ import Combine
 struct ContentView: View {
 
 @State private var showingAddScreen = false
-    @State var newPlayer : String = ""
-    
+@State var newPlayer : String = ""
 @ObservedObject var playerStore = PlayerStore()
     
     var newPlayerField: some View {
@@ -38,15 +37,14 @@ struct ContentView: View {
                 newPlayerField.padding()
                   
                 List{
-                        Section  (header: Text("All Players")) {
-                            ForEach(self.playerStore.players) { player in
-                                NavigationLink(destination: DetailedView()){
-                                    Text(player.name.capitalized)
-                                      
+                    Section  (header: Text("All Players")) {
+                        ForEach(self.playerStore.players) { player in
+                            NavigationLink(destination: DetailedView()){
+                                Text(player.name.capitalized)
                             }
-                              
                         }
-                            .onDelete(perform:self.delete)
+                        .onDelete(perform:self.delete)
+                        .onMove(perform: self.move)
                     }
                         
 
@@ -75,6 +73,10 @@ struct ContentView: View {
     func delete(at offsets: IndexSet) {
         playerStore.players.remove(atOffsets: offsets)
     }
+    
+    func move (from source : IndexSet, to destination: Int) {
+        playerStore.players.move(fromOffsets: source, toOffset: destination)
+    }
 }
 
 
@@ -85,7 +87,6 @@ struct ContentView_Previews: PreviewProvider {
     }
 
 
-// need to put       somewhere
 
 // Code I got from a tutorial to make the searchbar
    /*ForEach(players.filter({ "\($0)".contains(searchText.lowercased()) || searchText.isEmpty })){ players in
