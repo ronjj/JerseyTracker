@@ -6,3 +6,15 @@
 //
 
 import Foundation
+import SwiftUI
+import Combine
+
+struct Player: Identifiable {
+    var id = String()
+    var name: String
+
+}
+
+class PlayerStore: ObservableObject {
+    @Published var players = [Player]()
+}

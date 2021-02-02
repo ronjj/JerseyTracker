@@ -6,41 +6,48 @@
 //
 
 import SwiftUI
+import Combine
 
-struct Players: Identifiable {
-    var id = UUID()
-    var name: String
 
-}
 
 struct ContentView: View {
 
-@State private var searchText = ""
 @State private var showingAddScreen = false
+    @State var newPlayer : String = ""
     
-    var players = [
-        Players(name: "ronald"),
-        Players(name: "tom"),
-        Players(name: "luke"),
-        Players(name: "jack")
-    ]
+@ObservedObject var playerStore = PlayerStore()
+    
+    var newPlayerField: some View {
+        HStack{
+            TextField("Enter A New Player", text: self.$newPlayer)
+            Button(action: self.addNewPlayer , label: {
+                Text("Add New")
+            })
+        }
+    }
+    
+    func addNewPlayer() {
+        playerStore.players.append(Player(id: String(playerStore.players.count + 1), name:newPlayer))
+        self.newPlayer = ""
+    }
     
     var body: some View {
         NavigationView {
             VStack {
-               SearchBar(text: $searchText)
+                newPlayerField.padding()
                 List{
-                    Section  (header: Text("All Players")) {
-                    // Code I got from a tutorial to make the searchbar
-                       ForEach(players.filter({ "\($0)".contains(searchText.lowercased()) || searchText.isEmpty })){ players in
-                            NavigationLink(destination: DetailedView(),
-                                                           
-                                label: {
-                                    Text(players.name.capitalized)
-                                        })
+                 
+                        Section  (header: Text("All Players")) {
+                          
+                            ForEach(self.playerStore.players) { player in
+                                NavigationLink(destination: DetailedView()){
+                                    Text(player.name.capitalized)
                             }
+                          
+                        }
                     }
                     
+
                     Section  (header: Text("Incomplete Players")) {
                         // A ForEach for players that 0 or 1 toggles set
                     }
@@ -48,23 +55,23 @@ struct ContentView: View {
                     Section  (header: Text("Complete Players")) {
                         // A ForEach for players that have 2 toggles set
                     }
+                    
+           
                 }
+                
             }
+           
             .navigationTitle("Jersey Tracker")
             
             //logic for plus and edit button needs to be redone
-            .navigationBarItems(leading:EditButton(), trailing: Button(action: {
-                    self.showingAddScreen.toggle()
-                }) {
-                    Image(systemName: "plus")
-                }
-                
-                )
-            
-                .sheet(isPresented: $showingAddScreen) {
-                    AddPlayerView()
-                }
+            .navigationBarItems(leading:EditButton())
         }
+    }
+    
+   
+    
+    func delete(at offsets: IndexSet) {
+        playerStore.players.remove(atOffsets: offsets)
     }
 }
 
@@ -76,5 +83,13 @@ struct ContentView_Previews: PreviewProvider {
     }
 
 
+// need to put        .onDelete(perform:self.delete) somewhere
 
-
+// Code I got from a tutorial to make the searchbar
+   /*ForEach(players.filter({ "\($0)".contains(searchText.lowercased()) || searchText.isEmpty })){ players in
+        NavigationLink(destination: DetailedView(),
+                                       
+            label: {
+                Text(players.name.capitalized)
+                    })
+     }   */
