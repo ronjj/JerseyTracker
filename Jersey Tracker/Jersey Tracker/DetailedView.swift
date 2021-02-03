@@ -32,8 +32,8 @@ struct DetailedView: View {
                         }
                         
                        Section (header: Text("Additional Notes")){
-                        TextField("Notes", text: $notes)
-                            .frame(height: 55)
+                        TextEditor(text: $notes)
+                            .font(.custom("SF Pro", size: 18))
                                       
                                           
                         }

@@ -34,7 +34,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
-                newPlayerField.padding()
+                newPlayerField.padding( )
                 SearchBar(text: $searchText).padding()
                 List{
                     Section  (header: Text("All Players")) {
