@@ -12,9 +12,11 @@ import Combine
 
 struct ContentView: View {
 
+@State var searchText = ""
 @State private var showingAddScreen = false
 @State var newPlayer : String = ""
 @ObservedObject var playerStore = PlayerStore()
+
     
     var newPlayerField: some View {
         HStack{
@@ -25,6 +27,7 @@ struct ContentView: View {
         }
     }
     
+    //Add Function
     func addNewPlayer() {
         playerStore.players.append(Player(id: String(playerStore.players.count + 1), name:newPlayer))
         self.newPlayer = ""
@@ -35,6 +38,8 @@ struct ContentView: View {
             
             VStack {
                 newPlayerField.padding()
+                SearchBar(text: $searchText).padding()
+                
                   
                 List{
                     Section  (header: Text("All Players")) {
@@ -49,16 +54,14 @@ struct ContentView: View {
                         
 
                     Section  (header: Text("Incomplete Players")) {
-                        // A ForEach for players that 0 or 1 toggles set
+                        // A ForEach for players that have 0 or 1 toggle(s) set
+                
                     }
                     
                     Section  (header: Text("Complete Players")) {
                         // A ForEach for players that have 2 toggles set
                     }
-                    
-           
                 }
-                
             }
             
            
@@ -70,10 +73,12 @@ struct ContentView: View {
         }
     }
     
+    //Delete Function
     func delete(at offsets: IndexSet) {
         playerStore.players.remove(atOffsets: offsets)
     }
     
+    //Move Function
     func move (from source : IndexSet, to destination: Int) {
         playerStore.players.move(fromOffsets: source, toOffset: destination)
     }
@@ -95,4 +100,7 @@ struct ContentView_Previews: PreviewProvider {
             label: {
                 Text(players.name.capitalized)
                     })
-     }   */
+     }
+ 
+ would also need the view SearchBar()
+ */
