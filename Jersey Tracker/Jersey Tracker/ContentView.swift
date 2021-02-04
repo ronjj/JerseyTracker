@@ -8,37 +8,42 @@
 import SwiftUI
 import Combine
 
+
+
+struct PlayerItem: Identifiable, Codable {
+    var id = UUID()
+    var name: String
+
+}
+
+
+class Players: ObservableObject {
+    @Published var items = [PlayerItem]()
+    }
+
+
+/* Old One
+class PlayerStore: ObservableObject {
+    @Published var players = [Player]()
+}
+*/
+
+
+
 struct ContentView: View {
 
-@State var searchText = ""
-@State private var showingAddScreen = false
-@State var newPlayer : String = ""
-@ObservedObject var playerStore = PlayerStore()
 
-    
-    var newPlayerField: some View {
-        HStack{
-            TextField("Enter A New Player", text: self.$newPlayer)
-            Button(action: self.addNewPlayer , label: {
-                Text("Add New")
-            })
-        }
-    }
-    
-    //Add Player Function
-    func addNewPlayer() {
-        playerStore.players.append(Player(id: String(playerStore.players.count + 1), name:newPlayer))
-        self.newPlayer = ""
-    }
-    
+@State private var showingAddPlayer = false
+
+@ObservedObject var players = Players()
     var body: some View {
         NavigationView {
             VStack {
-                newPlayerField.padding( )
-                SearchBar(text: $searchText).padding()
+                
+              //  SearchBar(text: $searchText).padding()
                 List{
                     Section  (header: Text("All Players")) {
-                        ForEach(self.playerStore.players) { player in
+                        ForEach(self.players.items) { player in
                             NavigationLink(destination: DetailedView()){
                                 Text(player.name.capitalized)
                             }
@@ -70,37 +75,31 @@ struct ContentView: View {
             
            
             .navigationTitle("Jersey Tracker")
-            
-            //logic for plus and edit button needs to be redone
-            .navigationBarItems(leading:EditButton())
-           /* .navigationBarItems(trailing:
-                Button(action: {
-                   // self.showingAddPlayer = true
-                }) {
-                    Image(systemName: "plus")
-                }
-            )
-           */
-            
-            
             .navigationBarItems(leading:EditButton(),
                 trailing:
                     Button(action: {
-                        // self.showingAddPlayer = true
+                        self.showingAddPlayer = true
+                        
                             }) {
                                 Image(systemName: "plus")
                             })
+            .sheet(isPresented: $showingAddPlayer) {
+                
+            }
+            
         }
     }
     
+    
+    
     //Delete Player Function
     func delete(at offsets: IndexSet) {
-        playerStore.players.remove(atOffsets: offsets)
+        players.items.remove(atOffsets: offsets)
     }
     
     //Move Player Function
     func move (from source : IndexSet, to destination: Int) {
-        playerStore.players.move(fromOffsets: source, toOffset: destination)
+        players.items.move(fromOffsets: source, toOffset: destination)
     }
 }
 
@@ -114,6 +113,9 @@ struct ContentView_Previews: PreviewProvider {
 
 
 // Code I got from a tutorial to make the searchbar
+
+// @State var searchText = ""
+
    /*ForEach(players.filter({ "\($0)".contains(searchText.lowercased()) || searchText.isEmpty })){ players in
         NavigationLink(destination: DetailedView(),
                                        
