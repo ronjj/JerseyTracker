@@ -73,7 +73,23 @@ struct ContentView: View {
             
             //logic for plus and edit button needs to be redone
             .navigationBarItems(leading:EditButton())
-           
+           /* .navigationBarItems(trailing:
+                Button(action: {
+                   // self.showingAddPlayer = true
+                }) {
+                    Image(systemName: "plus")
+                }
+            )
+           */
+            
+            
+            .navigationBarItems(leading:EditButton(),
+                trailing:
+                    Button(action: {
+                        // self.showingAddPlayer = true
+                            }) {
+                                Image(systemName: "plus")
+                            })
         }
     }
     
