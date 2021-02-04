@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddPlayerView: View {
     @Environment(\.presentationMode) var presentationMode
+    @ObservedObject var players: Players
     @State var homeJersey = false
     @State var awayJersey = false
     @State var notes = ""
@@ -54,14 +55,19 @@ struct AddPlayerView: View {
                     }
                 }
             .navigationTitle("Add Player")
-            }
+            .navigationBarItems(trailing:
+                                    Button("Save") {
+                                        self.presentationMode.wrappedValue.dismiss()
+                                    })
+        }
     }
 }
 
 struct AddPlayerView_Previews: PreviewProvider {
     static var previews: some View {
-        AddPlayerView()
+        AddPlayerView( players: Players())
     }
+   
 }
 
 //Add Player Function in case I nee it

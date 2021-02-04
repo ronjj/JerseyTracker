@@ -13,6 +13,7 @@ import Foundation
 
 struct DetailedView: View {
     
+    
     @State var homeJersey = false
     @State var awayJersey = false
     @State var notes = ""

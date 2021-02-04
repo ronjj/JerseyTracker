@@ -22,7 +22,7 @@ class Players: ObservableObject {
     }
 
 
-/* Old One
+/* Old Class
 class PlayerStore: ObservableObject {
     @Published var players = [Player]()
 }
@@ -31,11 +31,11 @@ class PlayerStore: ObservableObject {
 
 
 struct ContentView: View {
-
-
+    
 @State private var showingAddPlayer = false
-
 @ObservedObject var players = Players()
+    
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -84,12 +84,11 @@ struct ContentView: View {
                                 Image(systemName: "plus")
                             })
             .sheet(isPresented: $showingAddPlayer) {
-                
+                  AddPlayerView(players: self.players)
             }
             
         }
     }
-    
     
     
     //Delete Player Function
