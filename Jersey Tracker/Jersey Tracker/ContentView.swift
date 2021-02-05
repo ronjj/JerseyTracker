@@ -18,7 +18,30 @@ struct PlayerItem: Identifiable, Codable {
 
 
 class Players: ObservableObject {
-    @Published var items = [PlayerItem]()
+    @Published var items = [PlayerItem](){
+        didSet {
+            let encoder = JSONEncoder()
+            
+            if let encoded = try? encoder.encode(items) {
+                UserDefaults.standard.set(encoded, forKey: "Items")
+            }
+        }
+    }
+    
+    init() {
+        if let items = UserDefaults.standard.data(forKey: "Items")
+        {
+            let decoder = JSONDecoder()
+            
+            if let decoded = try? decoder.decode([PlayerItem].self, from: items) {
+                self.items = decoded
+                return
+            }
+        }
+        
+        self.items = []
+    }
+
     }
 
 
@@ -39,8 +62,6 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
-                
-              //  SearchBar(text: $searchText).padding()
                 List{
                     Section  (header: Text("All Players")) {
                         ForEach(self.players.items) { player in
@@ -111,18 +132,3 @@ struct ContentView_Previews: PreviewProvider {
     }
 
 
-
-// Code I got from a tutorial to make the searchbar
-
-// @State var searchText = ""
-
-   /*ForEach(players.filter({ "\($0)".contains(searchText.lowercased()) || searchText.isEmpty })){ players in
-        NavigationLink(destination: DetailedView(),
-                                       
-            label: {
-                Text(players.name.capitalized)
-                    })
-     }
- 
- would also need the view SearchBar()
- */
