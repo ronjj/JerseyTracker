@@ -83,6 +83,7 @@ struct ContentView: View {
                             }) {
                                 Image(systemName: "plus")
                             })
+            //Show AddPlayerView as a Sheet
             .sheet(isPresented: $showingAddPlayer) {
                   AddPlayerView(players: self.players)
             }

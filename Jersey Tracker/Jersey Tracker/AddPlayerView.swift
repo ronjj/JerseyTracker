@@ -9,11 +9,12 @@ import SwiftUI
 
 struct AddPlayerView: View {
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var players: Players
     @State var homeJersey = false
     @State var awayJersey = false
     @State var notes = ""
     @State var newPlayer : String = ""
+    @ObservedObject var players: Players
+    
     
     
     var newPlayerField: some View {
@@ -33,7 +34,7 @@ struct AddPlayerView: View {
                 
                     Form{
                         Section(header: Text("Player Name")){
-                        newPlayerField.padding()
+                        newPlayerField
                         }
                         
                        Section (header: Text("Home Jersey")){
@@ -56,16 +57,19 @@ struct AddPlayerView: View {
                 }
             .navigationTitle("Add Player")
             .navigationBarItems(trailing:
-                                    Button("Save") {
-                                        self.presentationMode.wrappedValue.dismiss()
-                                    })
+                Button("Save") {    
+                    let item = PlayerItem(name: self.newPlayer)
+                    self.players.items.append(item)
+                    self.presentationMode.wrappedValue.dismiss()
+                    
+                })
         }
     }
 }
 
 struct AddPlayerView_Previews: PreviewProvider {
     static var previews: some View {
-        AddPlayerView( players: Players())
+        AddPlayerView(players: Players())
     }
    
 }
