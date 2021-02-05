@@ -35,14 +35,15 @@ struct DetailedView: View {
                        Section (header: Text("Additional Notes")){
                         TextEditor(text: $notes)
                             .font(.custom("SF Pro", size: 18))
+                            .frame(height: 125, alignment: .center)
+                            .foregroundColor(.gray)
+                            .multilineTextAlignment(.leading)
                                       
-                                          
                         }
                     }
-                
-             
                 }
             .navigationTitle("Player Information")
+            
             }
         }
     }
