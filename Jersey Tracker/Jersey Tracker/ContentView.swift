@@ -58,9 +58,7 @@ struct ContentView: View {
 @State private var showingAddPlayer = false
 @ObservedObject var players = Players()
 //@ObservedObject var userSettings = UserSettings()
-@Binding var homeJersey: Bool
-@Binding var awayJersey: Bool
-@Binding var notes: String
+
     
     var body: some View {
         NavigationView {
@@ -133,7 +131,7 @@ struct ContentView_Previews: PreviewProvider {
     @State static var passIn = true
     @State static var passInString = ""
     static var previews: some View {
-        ContentView(homeJersey: $passIn, awayJersey: $passIn, notes: $passInString)
+        ContentView()
         }
     }
 

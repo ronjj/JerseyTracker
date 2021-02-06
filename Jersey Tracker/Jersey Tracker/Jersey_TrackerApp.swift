@@ -14,7 +14,7 @@ struct Jersey_TrackerApp: App {
     @State  var passInString = ""
     var body: some Scene {
         WindowGroup {
-            ContentView(homeJersey: $passIn, awayJersey: $passIn, notes: $passInString)
+            ContentView()
         }
     }
 }
