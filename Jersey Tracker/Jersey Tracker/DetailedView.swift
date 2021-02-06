@@ -14,21 +14,15 @@ import Foundation
 
 
 struct DetailedView: View {
-    
-    //@AppStorage("homeJersey") var homeJersey = false
-   // @State var homeJersey = false
-    //@State var awayJersey = false
-   // @State var notes = ""
     @ObservedObject var userSettings = UserSettings()
-    
+  
    
     var body: some View {
         NavigationView {
             VStack(alignment: .leading){
                     Form{
                        Section (header: Text("Home Jersey")){
-                        Toggle("Received", isOn: self.$userSettings.homeJersey)
-                        
+                        Toggle("Received", isOn: self.$userSettings.homeJersey )
                             
                         }
                        
@@ -54,6 +48,7 @@ struct DetailedView: View {
     }
 
 struct DetailedView_Previews: PreviewProvider {
+   
     static var previews: some View {
         DetailedView()
     }

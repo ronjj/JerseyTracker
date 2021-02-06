@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct Jersey_TrackerApp: App {
+    
+    @State  var passIn = true
+    @State  var passInString = ""
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(homeJersey: $passIn, awayJersey: $passIn, notes: $passInString)
         }
     }
 }

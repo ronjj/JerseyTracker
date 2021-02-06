@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 class UserSettings: ObservableObject{
     
     
@@ -39,9 +40,6 @@ class UserSettings: ObservableObject{
 
 struct AddPlayerView: View {
     @Environment(\.presentationMode) var presentationMode
-   // @State var homeJersey = false
-    //@State var awayJersey = false
-    @State var notes = ""
     @State var newPlayer : String = ""
     @ObservedObject var players: Players
     @ObservedObject var userSettings = UserSettings()
@@ -51,12 +49,10 @@ struct AddPlayerView: View {
     var newPlayerField: some View {
         HStack{
             TextField("Enter Player Name", text: self.$newPlayer)
-        /*Button(action: self.addNewPlayer , label: {
-                Text("Add New")
-            })*/
         }
     }
     
+
     
     var body: some View {
         NavigationView {
@@ -67,14 +63,15 @@ struct AddPlayerView: View {
                         Section(header: Text("Player Name")){
                         newPlayerField
                         }
+                    
                         
                        Section (header: Text("Home Jersey")){
-                        Toggle("Received", isOn: self.$userSettings.homeJersey)
+                        Toggle("Received", isOn: $userSettings.homeJersey)
                             
                         }
                        
                        Section (header: Text("Away Jersey")){
-                        Toggle("Received", isOn: self.$userSettings.awayJersey)
+                        Toggle("Received", isOn: $userSettings.awayJersey)
                            
                         }
                         
@@ -94,8 +91,7 @@ struct AddPlayerView: View {
                     self.players.items.append(item)
                     self.presentationMode.wrappedValue.dismiss()
                     
-                    
-                })
+            })
         }
     }
 }
