@@ -11,29 +11,34 @@ import Foundation
 
 
 
+
+
 struct DetailedView: View {
     
+    //@AppStorage("homeJersey") var homeJersey = false
+   // @State var homeJersey = false
+    //@State var awayJersey = false
+   // @State var notes = ""
+    @ObservedObject var userSettings = UserSettings()
     
-    @State var homeJersey = false
-    @State var awayJersey = false
-    @State var notes = ""
-    
+   
     var body: some View {
         NavigationView {
             VStack(alignment: .leading){
                     Form{
                        Section (header: Text("Home Jersey")){
-                            Toggle("Received", isOn: $homeJersey)
+                        Toggle("Received", isOn: self.$userSettings.homeJersey)
+                        
                             
                         }
                        
                        Section (header: Text("Away Jersey")){
-                            Toggle("Received", isOn: $awayJersey)
+                        Toggle("Received", isOn: self.$userSettings.awayJersey)
                            
                         }
                         
                        Section (header: Text("Additional Notes")){
-                        TextEditor(text: $notes)
+                        TextEditor(text: self.$userSettings.notes)
                             .font(.custom("SF Pro", size: 18))
                             .frame(height: 125, alignment: .center)
                             .foregroundColor(.gray)

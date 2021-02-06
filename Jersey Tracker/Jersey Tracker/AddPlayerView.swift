@@ -7,13 +7,44 @@
 
 import SwiftUI
 
+class UserSettings: ObservableObject{
+    
+    
+    @Published var homeJersey: Bool{
+        didSet {
+            UserDefaults.standard.set(homeJersey, forKey: "homeJersey")
+        }
+    }
+    @Published var awayJersey: Bool{
+        didSet {
+            UserDefaults.standard.set(awayJersey, forKey: "awayJersey")
+        }
+    }
+    @Published var notes: String{
+        didSet {
+            UserDefaults.standard.set(notes, forKey: "notes")
+        }
+    }
+    
+    
+    
+    init() {
+        self.homeJersey = UserDefaults.standard.object(forKey: "homeJersey") as? Bool ?? false
+        self.awayJersey = UserDefaults.standard.object(forKey: "awayJersey") as? Bool ?? false
+       self.notes = UserDefaults.standard.object(forKey: "notes") as? String ?? ""
+        }
+    }
+
+
+
 struct AddPlayerView: View {
     @Environment(\.presentationMode) var presentationMode
-    @State var homeJersey = false
-    @State var awayJersey = false
+   // @State var homeJersey = false
+    //@State var awayJersey = false
     @State var notes = ""
     @State var newPlayer : String = ""
     @ObservedObject var players: Players
+    @ObservedObject var userSettings = UserSettings()
     
     
     
@@ -38,20 +69,20 @@ struct AddPlayerView: View {
                         }
                         
                        Section (header: Text("Home Jersey")){
-                            Toggle("Received", isOn: $homeJersey)
+                        Toggle("Received", isOn: self.$userSettings.homeJersey)
                             
                         }
                        
                        Section (header: Text("Away Jersey")){
-                            Toggle("Received", isOn: $awayJersey)
+                        Toggle("Received", isOn: self.$userSettings.awayJersey)
                            
                         }
                         
                        Section (header: Text("Additional Notes")){
-                        TextEditor(text: $notes)
+                        TextEditor(text: self.$userSettings.notes)
                             .font(.custom("SF Pro", size: 18))
                             .frame(height: 125, alignment: .center)
-                            .foregroundColor(.gray)
+                            .foregroundColor(.white)
                             .multilineTextAlignment(.leading)
                         }
                     }
@@ -62,6 +93,7 @@ struct AddPlayerView: View {
                     let item = PlayerItem(name: self.newPlayer)
                     self.players.items.append(item)
                     self.presentationMode.wrappedValue.dismiss()
+                    
                     
                 })
         }

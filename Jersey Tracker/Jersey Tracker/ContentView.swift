@@ -57,6 +57,7 @@ struct ContentView: View {
     
 @State private var showingAddPlayer = false
 @ObservedObject var players = Players()
+@ObservedObject var userSettings = UserSettings()
     
     
     var body: some View {
@@ -69,7 +70,7 @@ struct ContentView: View {
                                 Text(player.name.capitalized)
                             }
                         }
-                        .onDelete(perform:self.delete)
+                        .onDelete(perform: self.delete)
                         .onMove(perform: self.move)
                     }
                         
@@ -97,7 +98,7 @@ struct ContentView: View {
            
             .navigationTitle("Jersey Tracker")
             .navigationBarItems(leading:EditButton(),
-                trailing:
+            trailing:
                     Button(action: {
                         self.showingAddPlayer = true
                         
