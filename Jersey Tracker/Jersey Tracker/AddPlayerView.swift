@@ -57,8 +57,6 @@ struct AddPlayerView: View {
     var body: some View {
         NavigationView {
             VStack(alignment: .leading){
-                   
-                
                     Form{
                         Section(header: Text("Player Name")){
                         newPlayerField
@@ -76,7 +74,7 @@ struct AddPlayerView: View {
                         }
                         
                        Section (header: Text("Additional Notes")){
-                        TextEditor(text: self.$userSettings.notes)
+                        TextEditor(text: $userSettings.notes)
                             .font(.custom("SF Pro", size: 18))
                             .frame(height: 125, alignment: .center)
                             .foregroundColor(.white)

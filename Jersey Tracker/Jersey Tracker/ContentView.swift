@@ -10,7 +10,7 @@ import Combine
 
 
 
-struct PlayerItem: Identifiable, Codable {
+struct PlayerItem: Identifiable, Codable, Hashable {
     var id = UUID()
     var name: String
     
@@ -66,9 +66,10 @@ struct ContentView: View {
         NavigationView {
             VStack {
                 List{
-                    Section  (header: Text("All Players")) {
-                        ForEach(self.players.items) { player in
-                            NavigationLink(destination: DetailedView()){
+                    Section (header: Text("All Players")) {
+                        
+                        ForEach(self.players.items, id:\.self) { player in
+                            NavigationLink(destination: DetailedView(player:player)){
                                 Text(player.name.capitalized)
                             }
                         }

@@ -15,10 +15,11 @@ import Foundation
 
 struct DetailedView: View {
     @ObservedObject var userSettings = UserSettings()
-  
+    @State var player = PlayerItem(name: "")
    
     var body: some View {
         NavigationView {
+            
             VStack(alignment: .leading){
                     Form{
                        Section (header: Text("Home Jersey")){
