@@ -22,7 +22,7 @@ struct ContentView: View {
                     Section (header: Text("All Players")) {
                         ForEach(playersList) { player in
                             NavigationLink(destination: DetailedView(player: player)) {
-                                Text(player.firstName)
+                                Text(player.firstName + " " + player.lastName)
                             }
                         }
                         .onDelete(perform: delete)

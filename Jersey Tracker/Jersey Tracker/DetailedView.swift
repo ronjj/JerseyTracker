@@ -12,6 +12,8 @@ import SwiftUI
 struct DetailedView: View {
     
     let player: Player
+    
+    
     var body: some View {
         NavigationView {
             VStack(alignment: .leading){
