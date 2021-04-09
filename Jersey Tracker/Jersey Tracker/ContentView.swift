@@ -15,19 +15,19 @@ struct ContentView: View {
     @State private var playersList = Players.PlayersList
     let player: Player
     
-    
     var body: some View {
         NavigationView {
             VStack {
                 List{
                     Section (header: Text("All Players")) {
                         ForEach(playersList) { player in
-                            Text(player.firstName)
+                            NavigationLink(destination: DetailedView(player: player)) {
+                                Text(player.firstName)
+                            }
                         }
                         .onDelete(perform: delete)
                         .onMove(perform: move)
                     }
-                    
                 }
                 
                 /*
@@ -64,7 +64,6 @@ struct ContentView: View {
                 AddPlayerView()
             }
         }
-        
     }
 
     
@@ -78,12 +77,12 @@ struct ContentView: View {
     func move (from source : IndexSet, to destination: Int) {
         playersList.move(fromOffsets: source, toOffset: destination)
     }
-
-
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView(player: Players.samplePlayer1)
+    
+    
+    
+    struct ContentView_Previews: PreviewProvider {
+        static var previews: some View {
+            ContentView(player: Players.samplePlayer1)
         }
     }
 }
