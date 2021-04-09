@@ -6,133 +6,84 @@
 //
 
 import SwiftUI
-import Combine
-
-
-
-struct PlayerItem: Identifiable, Codable, Hashable {
-    var id = UUID()
-    var name: String
-    
-}
-
-
-class Players: ObservableObject {
-    @Published var items = [PlayerItem](){
-        didSet {
-            let encoder = JSONEncoder()
-            
-            if let encoded = try? encoder.encode(items) {
-                UserDefaults.standard.set(encoded, forKey: "Items")
-            }
-        }
-    }
-    
-    init() {
-        if let items = UserDefaults.standard.data(forKey: "Items")
-        {
-            let decoder = JSONDecoder()
-            
-            if let decoded = try? decoder.decode([PlayerItem].self, from: items) {
-                self.items = decoded
-                return
-            }
-        }
-        
-        self.items = []
-    }
-
-    }
-
-
-/* Old Class
-class PlayerStore: ObservableObject {
-    @Published var players = [Player]()
-}
-*/
 
 
 
 struct ContentView: View {
     
-@State private var showingAddPlayer = false
-@ObservedObject var players = Players()
-//@ObservedObject var userSettings = UserSettings()
-
+    @State private var showingAddPlayer = false
+    @State private var playersList = Players.PlayersList
+    let player: Player
+    
     
     var body: some View {
         NavigationView {
             VStack {
                 List{
                     Section (header: Text("All Players")) {
-                        
-                        ForEach(self.players.items, id:\.self) { player in
-                            NavigationLink(destination: DetailedView(player:player)){
-                                Text(player.name.capitalized)
-                            }
+                        ForEach(playersList) { player in
+                            Text(player.firstName)
                         }
-                        .onDelete(perform: self.delete)
-                        .onMove(perform: self.move)
-                    }
-                        
-
-                    Section  (header: Text("Incomplete Players")) {
-                        // A ForEach for players that have 0 or 1 toggle(s) set
-                        /*
-                         Need to add onDelete and onMove
-                         functions under the ForEach when
-                         I add it
-                         */
+                        .onDelete(perform: delete)
+                        .onMove(perform: move)
                     }
                     
-                    Section  (header: Text("Complete Players")) {
-                        // A ForEach for players that have 2 toggles set
-                        /*
-                         Need to add onDelete and onMove
-                         functions under the ForEach when
-                         I add it
-                         */
-                    }
                 }
+                
+                /*
+                 Section  (header: Text("Incomplete Players")) {
+                 // A ForEach for players that have 0 or 1 toggle(s) set
+                 /*
+                 Need to add onDelete and onMove
+                 functions under the ForEach when
+                 I add it
+                 */
+                 }
+                 
+                 Section  (header: Text("Complete Players")) {
+                 // A ForEach for players that have 2 toggles set
+                 /*
+                 Need to add onDelete and onMove
+                 functions under the ForEach when
+                 I add it
+                 */
+                 }
+                 */
             }
-            
-           
             .navigationTitle("Jersey Tracker")
             .navigationBarItems(leading:EditButton(),
-            trailing:
-                    Button(action: {
-                        self.showingAddPlayer = true
-                        
-                            }) {
-                                Image(systemName: "plus")
-                            })
+                                trailing:
+                                    Button(action: {
+                                        self.showingAddPlayer = true
+                                        
+                                    }) {
+                                        Image(systemName: "plus")
+                                    })
             //Show AddPlayerView as a Sheet
             .sheet(isPresented: $showingAddPlayer) {
-                  AddPlayerView(players: self.players)
+                AddPlayerView()
             }
-            
         }
+        
     }
+
     
     
     //Delete Player Function
     func delete(at offsets: IndexSet) {
-        players.items.remove(atOffsets: offsets)
+        playersList.remove(atOffsets: offsets)
     }
     
     //Move Player Function
     func move (from source : IndexSet, to destination: Int) {
-        players.items.move(fromOffsets: source, toOffset: destination)
+        playersList.move(fromOffsets: source, toOffset: destination)
     }
-}
+
 
 
 struct ContentView_Previews: PreviewProvider {
-    @State static var passIn = true
-    @State static var passInString = ""
     static var previews: some View {
-        ContentView()
+        ContentView(player: Players.samplePlayer1)
         }
     }
-
-
+}

@@ -6,34 +6,31 @@
 //
 
 import SwiftUI
-import Combine
-import Foundation
-
-
 
 
 
 struct DetailedView: View {
-    @ObservedObject var userSettings = UserSettings()
-    @State var player = PlayerItem(name: "")
+   // @ObservedObject var userSettings = UserSettings()
+    @Binding var homeJersey: Bool
+    @Binding var awayJersey: Bool
+    @Binding var notes: String
    
     var body: some View {
         NavigationView {
-            
             VStack(alignment: .leading){
                     Form{
                        Section (header: Text("Home Jersey")){
-                        Toggle("Received", isOn: self.$userSettings.homeJersey )
+                        Toggle("Received", isOn: self.$homeJersey )
                             
                         }
                        
                        Section (header: Text("Away Jersey")){
-                        Toggle("Received", isOn: self.$userSettings.awayJersey)
+                        Toggle("Received", isOn: self.$awayJersey)
                            
                         }
                         
                        Section (header: Text("Additional Notes")){
-                        TextEditor(text: self.$userSettings.notes)
+                        TextEditor(text: self.$notes)
                             .font(.custom("SF Pro", size: 18))
                             .frame(height: 125, alignment: .center)
                             .foregroundColor(.gray)
@@ -51,7 +48,7 @@ struct DetailedView: View {
 struct DetailedView_Previews: PreviewProvider {
    
     static var previews: some View {
-        DetailedView()
+        DetailedView(homeJersey: .constant(false), awayJersey: .constant(false), notes: .constant("") )
     }
 }
 
